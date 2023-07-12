@@ -8,8 +8,9 @@ void main() {
       container.read(repositoryOverviewDataSourceProvider);
 
   test('search repository', () async {
-    final results = await repositoryOverviewDataSource.searchRepositoryOverview('test');
+    final results = await repositoryOverviewDataSource
+        .searchRepositoryOverviewWithCursor('test', 1, 3);
     expect(results.first.owner.login.runtimeType, String);
-    expect(results.length, 30);
+    expect(results.length, 3);
   });
 }
