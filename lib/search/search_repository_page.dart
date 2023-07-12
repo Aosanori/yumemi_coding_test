@@ -8,7 +8,8 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'search_repository_state_notifier.dart';
 
 class SearchRepositoryPage extends ConsumerWidget {
-  const SearchRepositoryPage({super.key});
+  SearchRepositoryPage({super.key});
+  final TextEditingController _queryTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,31 +22,40 @@ class SearchRepositoryPage extends ConsumerWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  final notifier = ref.read(
-                    searchRepositoryStateNotifierProvider.notifier,
-                  );
-                  notifier.searchRepositoryOverview('aaa');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  elevation: 16,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                      right: 10,
+                      bottom: 15,
+                    ),
+                    child: TextField(
+                      controller: _queryTextController,
+                      enabled: true,
+                      // style: TextStyle(eee
+                      //     color:
+                      //         widget.isDarkMode ? Colors.white : Colors.black),
+                      obscureText: false,
+                    ),
                   ),
                 ),
-                child: const Text(
-                  'Get Result',
-                  style: TextStyle(fontSize: 30),
-                  textAlign: TextAlign.center,
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final notifier = ref.read(
+                        searchRepositoryStateNotifierProvider.notifier,
+                      );
+                      notifier.resetList();
+                      notifier
+                          .searchRepositoryOverview(_queryTextController.text);
+                    },
+                    child: const Text('Search'),
+                  ),
                 ),
-              ),
+              ],
             ),
             Expanded(
               child: Container(
@@ -55,7 +65,8 @@ class SearchRepositoryPage extends ConsumerWidget {
                       final notifier = ref.read(
                         searchRepositoryStateNotifierProvider.notifier,
                       );
-                      notifier.searchRepositoryOverview('aaa');
+                      notifier
+                          .searchRepositoryOverview(_queryTextController.text);
                     },
                     child: ListView.builder(
                       itemCount: data.length,
@@ -69,13 +80,14 @@ class SearchRepositoryPage extends ConsumerWidget {
                               backgroundImage:
                                   NetworkImage(data[index].owner.avatar_url),
                             ),
-                          subtitle: Text(data[index].owner.login),
-                          onTap: () {},
+                            //trailing: Icon(icons[index]),
+                          ),
                         );
                       },
                     ),
                   ),
-                  loading: () => const Center(child:CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
                   error: (error, stackTrace) => Text(error.toString()),
                 ),
               ),

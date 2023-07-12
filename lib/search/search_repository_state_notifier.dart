@@ -20,6 +20,10 @@ class SearchRepositoryStateNotifier
         );
   final RepositoryOverviewDataSource repositoryOverviewDataSource;
 
+  void resetList() {
+    state = const AsyncValue.data([]);
+  }
+
   Future<void> searchRepositoryOverview(
     String repositoryQuery,
   ) async {
