@@ -15,13 +15,13 @@ class RepositoryOverview with _$RepositoryOverview {
     required int id,
     required String name,
     required bool private,
-    required String language,
+    String? description,
+    String? language,
     required int stargazers_count,
     required int forks_count,
     required int open_issues,
     required int watchers,
     required RepositoryOwner owner,
-    //@Default(false) bool isPremium,
   }) = _RepositoryOverview;
 
   factory RepositoryOverview.fromJson(Map<String, dynamic> json) => _$RepositoryOverviewFromJson(json);
