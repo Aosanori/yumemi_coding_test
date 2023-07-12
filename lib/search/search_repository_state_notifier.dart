@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../repository_overview/repository_overview.dart';
@@ -19,18 +20,20 @@ class SearchRepositoryStateNotifier
           const AsyncValue.data(<RepositoryOverview>[]),
         );
   final RepositoryOverviewDataSource repositoryOverviewDataSource;
+  final TextEditingController queryTextController = TextEditingController();
 
-  void resetList() {
-    state = const AsyncValue.data([]);
+  /// 検索クエリを途中で変えられたら、2ページ目から変えられたクエリで結果を取得する動作を回避するために
+  /// submitされた値を一旦保持しておくためのメンバ
+  String lastSearchRepositoryQuery = '';
+
+  Future<void> searchRepositoryOverviewOnSubmit() async {
+    state = const AsyncValue.loading();
+    lastSearchRepositoryQuery = queryTextController.text;
+    await searchRepositoryOverview();
   }
 
-  Future<void> searchRepositoryOverview(
-    String repositoryQuery,
-  ) async {
-    // 空の場合はローディングとする
-    if ((state.value ?? []).isEmpty) {
-      state = const AsyncValue.loading();
-    }
+  Future<void> searchRepositoryOverview() async {
+    final repositoryQuery = lastSearchRepositoryQuery;
     try {
       final newRepositoryOverviewResults =
           await repositoryOverviewDataSource.searchRepositoryOverviewWithCursor(

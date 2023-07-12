@@ -10,13 +10,15 @@ import 'repository_list_view.dart';
 import 'search_repository_state_notifier.dart';
 
 class SearchRepositoryPage extends ConsumerWidget {
-  SearchRepositoryPage({super.key});
-  final TextEditingController _queryTextController = TextEditingController();
+  const SearchRepositoryPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchRepositoryOverviewState =
         ref.watch(searchRepositoryStateNotifierProvider);
+                              final notifier = ref.read(
+                        searchRepositoryStateNotifierProvider.notifier,
+                      );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expanded Column Sample'),
@@ -34,7 +36,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                       bottom: 15,
                     ),
                     child: TextField(
-                      controller: _queryTextController,
+                      controller: notifier.queryTextController ,
                       enabled: true,
                       // style: TextStyle(eee
                       //     color:
@@ -46,14 +48,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: ElevatedButton(
-                    onPressed: () {
-                      final notifier = ref.read(
-                        searchRepositoryStateNotifierProvider.notifier,
-                      );
-                      notifier.resetList();
-                      notifier
-                          .searchRepositoryOverview(_queryTextController.text);
-                    },
+                    onPressed: notifier.searchRepositoryOverviewOnSubmit,
                     child: const Text('Search'),
                   ),
                 ),
@@ -68,7 +63,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                         searchRepositoryStateNotifierProvider.notifier,
                       );
                       notifier
-                          .searchRepositoryOverview(_queryTextController.text);
+                          .searchRepositoryOverview();
                     },
                     child: repositoryList.isNotEmpty
                         ? RepositoryListView(repositoryList)
