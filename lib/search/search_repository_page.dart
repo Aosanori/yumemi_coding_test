@@ -10,7 +10,11 @@ class SearchRepositoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expanded Column Sample'),
+        title: const Text('GitHub Repository Search App',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: const Center(
         child: Column(

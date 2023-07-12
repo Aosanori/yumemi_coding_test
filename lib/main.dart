@@ -6,23 +6,20 @@ import 'search/search_repository_page.dart';
 void main() {
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: GitHubRepositorySearchApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class GitHubRepositorySearchApp extends StatelessWidget {
+  const GitHubRepositorySearchApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SearchRepositoryPage(),
+      theme: ThemeData(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true),
+      home: const SearchRepositoryPage(),
     );
   }
 }
