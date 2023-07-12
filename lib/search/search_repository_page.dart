@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs
-
-// ignore: implementation_imports
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+import 'repository_list_tile.dart';
 
 import 'search_repository_state_notifier.dart';
 
@@ -37,7 +35,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                       // style: TextStyle(eee
                       //     color:
                       //         widget.isDarkMode ? Colors.white : Colors.black),
-                      obscureText: false,
+                      // obscureText: false,
                     ),
                   ),
                 ),
@@ -71,22 +69,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                            child: InkWell(
-                            onTap: () {},
-                            child: ListTile(
-                              title: Text(data[index].name),
-                              subtitle: Text(
-                                '★${data[index].stargazers_count}',
-                              ),
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(data[index].owner.avatar_url),
-                              ),
-                              //trailing: Icon(icons[index]),
-                            ),
-                          ),
-                        );
+                        return RepositoryListTile(data[index]);
                       },
                     ),
                   ),
