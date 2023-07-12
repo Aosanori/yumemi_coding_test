@@ -23,7 +23,8 @@ mixin _$RepositoryOverview {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool get private => throw _privateConstructorUsedError;
-  String get language => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get language => throw _privateConstructorUsedError;
   int get stargazers_count => throw _privateConstructorUsedError;
   int get forks_count => throw _privateConstructorUsedError;
   int get open_issues => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $RepositoryOverviewCopyWith<$Res> {
       {int id,
       String name,
       bool private,
-      String language,
+      String? description,
+      String? language,
       int stargazers_count,
       int forks_count,
       int open_issues,
@@ -72,7 +74,8 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
     Object? id = null,
     Object? name = null,
     Object? private = null,
-    Object? language = null,
+    Object? description = freezed,
+    Object? language = freezed,
     Object? stargazers_count = null,
     Object? forks_count = null,
     Object? open_issues = null,
@@ -92,10 +95,14 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
               as bool,
-      language: null == language
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      language: freezed == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stargazers_count: null == stargazers_count
           ? _value.stargazers_count
           : stargazers_count // ignore: cast_nullable_to_non_nullable
@@ -140,7 +147,8 @@ abstract class _$$_RepositoryOverviewCopyWith<$Res>
       {int id,
       String name,
       bool private,
-      String language,
+      String? description,
+      String? language,
       int stargazers_count,
       int forks_count,
       int open_issues,
@@ -165,7 +173,8 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? private = null,
-    Object? language = null,
+    Object? description = freezed,
+    Object? language = freezed,
     Object? stargazers_count = null,
     Object? forks_count = null,
     Object? open_issues = null,
@@ -185,10 +194,14 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
               as bool,
-      language: null == language
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      language: freezed == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       stargazers_count: null == stargazers_count
           ? _value.stargazers_count
           : stargazers_count // ignore: cast_nullable_to_non_nullable
@@ -220,7 +233,8 @@ class _$_RepositoryOverview implements _RepositoryOverview {
       {required this.id,
       required this.name,
       required this.private,
-      required this.language,
+      this.description,
+      this.language,
       required this.stargazers_count,
       required this.forks_count,
       required this.open_issues,
@@ -237,7 +251,9 @@ class _$_RepositoryOverview implements _RepositoryOverview {
   @override
   final bool private;
   @override
-  final String language;
+  final String? description;
+  @override
+  final String? language;
   @override
   final int stargazers_count;
   @override
@@ -251,7 +267,7 @@ class _$_RepositoryOverview implements _RepositoryOverview {
 
   @override
   String toString() {
-    return 'RepositoryOverview(id: $id, name: $name, private: $private, language: $language, stargazers_count: $stargazers_count, forks_count: $forks_count, open_issues: $open_issues, watchers: $watchers, owner: $owner)';
+    return 'RepositoryOverview(id: $id, name: $name, private: $private, description: $description, language: $language, stargazers_count: $stargazers_count, forks_count: $forks_count, open_issues: $open_issues, watchers: $watchers, owner: $owner)';
   }
 
   @override
@@ -262,6 +278,8 @@ class _$_RepositoryOverview implements _RepositoryOverview {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.private, private) || other.private == private) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.language, language) ||
                 other.language == language) &&
             (identical(other.stargazers_count, stargazers_count) ||
@@ -277,8 +295,8 @@ class _$_RepositoryOverview implements _RepositoryOverview {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, private, language,
-      stargazers_count, forks_count, open_issues, watchers, owner);
+  int get hashCode => Object.hash(runtimeType, id, name, private, description,
+      language, stargazers_count, forks_count, open_issues, watchers, owner);
 
   @JsonKey(ignore: true)
   @override
@@ -300,7 +318,8 @@ abstract class _RepositoryOverview implements RepositoryOverview {
       {required final int id,
       required final String name,
       required final bool private,
-      required final String language,
+      final String? description,
+      final String? language,
       required final int stargazers_count,
       required final int forks_count,
       required final int open_issues,
@@ -317,7 +336,9 @@ abstract class _RepositoryOverview implements RepositoryOverview {
   @override
   bool get private;
   @override
-  String get language;
+  String? get description;
+  @override
+  String? get language;
   @override
   int get stargazers_count;
   @override

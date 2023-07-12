@@ -20,9 +20,10 @@ class APIClient {
       }
     } on http.ClientException catch (e) {
       debugPrint('Network error: $e');
+      rethrow;
     } catch (e) {
       debugPrint('Unknown error: $e');
+      rethrow;
     }
-    return {};
   }
 }
