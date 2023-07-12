@@ -60,13 +60,15 @@ class SearchRepositoryPage extends ConsumerWidget {
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(data[index].name),
-                            ],
-                          ),
+                        return Card(
+                          child: ListTile(
+                            title: Text(data[index].name),
+                            subtitle:
+                                Text(data[index].stargazers_count.toString()),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(data[index].owner.avatar_url),
+                            ),
                           subtitle: Text(data[index].owner.login),
                           onTap: () {},
                         );
