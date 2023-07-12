@@ -7,6 +7,7 @@ import '../components/network_error_widget.dart';
 import '../components/no_result_widget.dart';
 import '../components/unknown_error_widget.dart';
 import 'repository_list_view.dart';
+import 'search_repository_query_form.dart';
 import 'search_repository_state_notifier.dart';
 
 class SearchRepositoryPage extends ConsumerWidget {
@@ -16,9 +17,6 @@ class SearchRepositoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchRepositoryOverviewState =
         ref.watch(searchRepositoryStateNotifierProvider);
-                              final notifier = ref.read(
-                        searchRepositoryStateNotifierProvider.notifier,
-                      );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expanded Column Sample'),
@@ -26,34 +24,7 @@ class SearchRepositoryPage extends ConsumerWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                      right: 10,
-                      bottom: 15,
-                    ),
-                    child: TextField(
-                      controller: notifier.queryTextController ,
-                      enabled: true,
-                      // style: TextStyle(eee
-                      //     color:
-                      //         widget.isDarkMode ? Colors.white : Colors.black),
-                      // obscureText: false,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ElevatedButton(
-                    onPressed: notifier.searchRepositoryOverviewOnSubmit,
-                    child: const Text('Search'),
-                  ),
-                ),
-              ],
-            ),
+            const SearchRepositoryQueryForm(),
             Expanded(
               child: Container(
                 child: searchRepositoryOverviewState.when(
@@ -62,8 +33,7 @@ class SearchRepositoryPage extends ConsumerWidget {
                       final notifier = ref.read(
                         searchRepositoryStateNotifierProvider.notifier,
                       );
-                      notifier
-                          .searchRepositoryOverview();
+                      notifier.searchRepositoryOverview();
                     },
                     child: repositoryList.isNotEmpty
                         ? RepositoryListView(repositoryList)
