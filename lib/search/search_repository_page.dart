@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
+import '../components/network_error_widget.dart';
 import '../components/no_result_widget.dart';
+import '../components/unknown_error_widget.dart';
 import 'repository_list_view.dart';
 import 'search_repository_state_notifier.dart';
 
@@ -73,7 +76,9 @@ class SearchRepositoryPage extends ConsumerWidget {
                   ),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (error, stackTrace) => Text(error.toString()),
+                  error: (error, stackTrace) => error is http.ClientException
+                      ? const Center(child: NetworkErrorWidget())
+                      : const Center(child: UnknownErrorWidget()),
                 ),
               ),
             ),
