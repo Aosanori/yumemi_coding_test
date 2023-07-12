@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
-import 'repository_list_tile.dart';
 
+import '../components/no_result_widget.dart';
+import 'repository_list_view.dart';
 import 'search_repository_state_notifier.dart';
 
 class SearchRepositoryPage extends ConsumerWidget {
@@ -58,7 +59,7 @@ class SearchRepositoryPage extends ConsumerWidget {
             Expanded(
               child: Container(
                 child: searchRepositoryOverviewState.when(
-                  data: (data) => LazyLoadScrollView(
+                  data: (repositoryList) => LazyLoadScrollView(
                     onEndOfPage: () {
                       final notifier = ref.read(
                         searchRepositoryStateNotifierProvider.notifier,
@@ -66,12 +67,9 @@ class SearchRepositoryPage extends ConsumerWidget {
                       notifier
                           .searchRepositoryOverview(_queryTextController.text);
                     },
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return RepositoryListTile(data[index]);
-                      },
-                    ),
+                    child: repositoryList.isNotEmpty
+                        ? RepositoryListView(repositoryList)
+                        : const Center(child: NoResultsWidget()),
                   ),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
