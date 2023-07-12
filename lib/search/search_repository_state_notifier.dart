@@ -27,6 +27,7 @@ class SearchRepositoryStateNotifier
   Future<void> searchRepositoryOverview(
     String repositoryQuery,
   ) async {
+    // 空の場合はローディングとする
     if ((state.value ?? []).isEmpty) {
       state = const AsyncValue.loading();
     }
@@ -41,7 +42,10 @@ class SearchRepositoryStateNotifier
         [...state.value ?? [], ...newRepositoryOverviewResults],
       );
     } on Exception catch (error, stackTrace) {
-      state = AsyncValue.error(error, stackTrace);
+      // 検索結果の最後まで行った場合はエラーで置き換えられないように
+      if ((state.value ?? []).isEmpty) {
+        state = AsyncValue.error(error, stackTrace);
+      }
     }
   }
 }
