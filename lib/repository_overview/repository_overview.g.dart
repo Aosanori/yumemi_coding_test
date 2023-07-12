@@ -12,8 +12,11 @@ _$_RepositoryOverview _$$_RepositoryOverviewFromJson(
       id: json['id'] as int,
       name: json['name'] as String,
       private: json['private'] as bool,
+      language: json['language'] as String,
       stargazers_count: json['stargazers_count'] as int,
       forks_count: json['forks_count'] as int,
+      open_issues: json['open_issues'] as int,
+      watchers: json['watchers'] as int,
       owner: RepositoryOwner.fromJson(json['owner'] as Map<String, dynamic>),
     );
 
@@ -23,7 +26,10 @@ Map<String, dynamic> _$$_RepositoryOverviewToJson(
       'id': instance.id,
       'name': instance.name,
       'private': instance.private,
+      'language': instance.language,
       'stargazers_count': instance.stargazers_count,
       'forks_count': instance.forks_count,
+      'open_issues': instance.open_issues,
+      'watchers': instance.watchers,
       'owner': instance.owner,
     };

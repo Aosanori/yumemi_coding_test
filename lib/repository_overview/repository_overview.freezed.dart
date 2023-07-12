@@ -23,8 +23,11 @@ mixin _$RepositoryOverview {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool get private => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
   int get stargazers_count => throw _privateConstructorUsedError;
   int get forks_count => throw _privateConstructorUsedError;
+  int get open_issues => throw _privateConstructorUsedError;
+  int get watchers => throw _privateConstructorUsedError;
   RepositoryOwner get owner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,8 +46,11 @@ abstract class $RepositoryOverviewCopyWith<$Res> {
       {int id,
       String name,
       bool private,
+      String language,
       int stargazers_count,
       int forks_count,
+      int open_issues,
+      int watchers,
       RepositoryOwner owner});
 
   $RepositoryOwnerCopyWith<$Res> get owner;
@@ -66,8 +72,11 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
     Object? id = null,
     Object? name = null,
     Object? private = null,
+    Object? language = null,
     Object? stargazers_count = null,
     Object? forks_count = null,
+    Object? open_issues = null,
+    Object? watchers = null,
     Object? owner = null,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +92,10 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       stargazers_count: null == stargazers_count
           ? _value.stargazers_count
           : stargazers_count // ignore: cast_nullable_to_non_nullable
@@ -90,6 +103,14 @@ class _$RepositoryOverviewCopyWithImpl<$Res, $Val extends RepositoryOverview>
       forks_count: null == forks_count
           ? _value.forks_count
           : forks_count // ignore: cast_nullable_to_non_nullable
+              as int,
+      open_issues: null == open_issues
+          ? _value.open_issues
+          : open_issues // ignore: cast_nullable_to_non_nullable
+              as int,
+      watchers: null == watchers
+          ? _value.watchers
+          : watchers // ignore: cast_nullable_to_non_nullable
               as int,
       owner: null == owner
           ? _value.owner
@@ -119,8 +140,11 @@ abstract class _$$_RepositoryOverviewCopyWith<$Res>
       {int id,
       String name,
       bool private,
+      String language,
       int stargazers_count,
       int forks_count,
+      int open_issues,
+      int watchers,
       RepositoryOwner owner});
 
   @override
@@ -141,8 +165,11 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? private = null,
+    Object? language = null,
     Object? stargazers_count = null,
     Object? forks_count = null,
+    Object? open_issues = null,
+    Object? watchers = null,
     Object? owner = null,
   }) {
     return _then(_$_RepositoryOverview(
@@ -158,6 +185,10 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
           ? _value.private
           : private // ignore: cast_nullable_to_non_nullable
               as bool,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       stargazers_count: null == stargazers_count
           ? _value.stargazers_count
           : stargazers_count // ignore: cast_nullable_to_non_nullable
@@ -165,6 +196,14 @@ class __$$_RepositoryOverviewCopyWithImpl<$Res>
       forks_count: null == forks_count
           ? _value.forks_count
           : forks_count // ignore: cast_nullable_to_non_nullable
+              as int,
+      open_issues: null == open_issues
+          ? _value.open_issues
+          : open_issues // ignore: cast_nullable_to_non_nullable
+              as int,
+      watchers: null == watchers
+          ? _value.watchers
+          : watchers // ignore: cast_nullable_to_non_nullable
               as int,
       owner: null == owner
           ? _value.owner
@@ -181,8 +220,11 @@ class _$_RepositoryOverview implements _RepositoryOverview {
       {required this.id,
       required this.name,
       required this.private,
+      required this.language,
       required this.stargazers_count,
       required this.forks_count,
+      required this.open_issues,
+      required this.watchers,
       required this.owner});
 
   factory _$_RepositoryOverview.fromJson(Map<String, dynamic> json) =>
@@ -195,15 +237,21 @@ class _$_RepositoryOverview implements _RepositoryOverview {
   @override
   final bool private;
   @override
+  final String language;
+  @override
   final int stargazers_count;
   @override
   final int forks_count;
+  @override
+  final int open_issues;
+  @override
+  final int watchers;
   @override
   final RepositoryOwner owner;
 
   @override
   String toString() {
-    return 'RepositoryOverview(id: $id, name: $name, private: $private, stargazers_count: $stargazers_count, forks_count: $forks_count, owner: $owner)';
+    return 'RepositoryOverview(id: $id, name: $name, private: $private, language: $language, stargazers_count: $stargazers_count, forks_count: $forks_count, open_issues: $open_issues, watchers: $watchers, owner: $owner)';
   }
 
   @override
@@ -214,17 +262,23 @@ class _$_RepositoryOverview implements _RepositoryOverview {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.private, private) || other.private == private) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.stargazers_count, stargazers_count) ||
                 other.stargazers_count == stargazers_count) &&
             (identical(other.forks_count, forks_count) ||
                 other.forks_count == forks_count) &&
+            (identical(other.open_issues, open_issues) ||
+                other.open_issues == open_issues) &&
+            (identical(other.watchers, watchers) ||
+                other.watchers == watchers) &&
             (identical(other.owner, owner) || other.owner == owner));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, private, stargazers_count, forks_count, owner);
+  int get hashCode => Object.hash(runtimeType, id, name, private, language,
+      stargazers_count, forks_count, open_issues, watchers, owner);
 
   @JsonKey(ignore: true)
   @override
@@ -246,8 +300,11 @@ abstract class _RepositoryOverview implements RepositoryOverview {
       {required final int id,
       required final String name,
       required final bool private,
+      required final String language,
       required final int stargazers_count,
       required final int forks_count,
+      required final int open_issues,
+      required final int watchers,
       required final RepositoryOwner owner}) = _$_RepositoryOverview;
 
   factory _RepositoryOverview.fromJson(Map<String, dynamic> json) =
@@ -260,9 +317,15 @@ abstract class _RepositoryOverview implements RepositoryOverview {
   @override
   bool get private;
   @override
+  String get language;
+  @override
   int get stargazers_count;
   @override
   int get forks_count;
+  @override
+  int get open_issues;
+  @override
+  int get watchers;
   @override
   RepositoryOwner get owner;
   @override
