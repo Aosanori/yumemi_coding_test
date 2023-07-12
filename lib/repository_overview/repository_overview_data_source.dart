@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '../utils/environment_variables.dart';
 import 'repository_overview.dart';
 
 final repositoryOverviewDataSourceProvider =
@@ -25,8 +26,7 @@ class RepositoryOverviewDataSource {
     //   repositoryQuery = query;
     // }
 
-    final apiUrl =
-        'https://api.github.com/search/repositories?q=$repositoryQuery&page=$page&per_page=$itemsPerPage';
+    final apiUrl = generateURLFromSearchQuery(repositoryQuery, page, itemsPerPage);
     final apiUri = Uri.parse(apiUrl);
     final response = await http.get(apiUri);
 
