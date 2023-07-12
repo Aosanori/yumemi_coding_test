@@ -10,8 +10,10 @@ final repositoryOverviewDataSourceProvider =
     Provider((ref) => RepositoryOverviewDataSource());
 
 class RepositoryOverviewDataSource {
-  Future<List<RepositoryOverview>> searchRepositoryOverview(
+  Future<List<RepositoryOverview>> searchRepositoryOverviewWithCursor(
     String repositoryQuery,
+    int page,
+    int itemsPerPage,
   ) async {
     // 空白をクエリ用に+に変換する処理
     // if (repositoryQuery.substring(0, 0).isEmpty) {
@@ -24,7 +26,7 @@ class RepositoryOverviewDataSource {
     // }
 
     final apiUrl =
-        'https://api.github.com/search/repositories?q=$repositoryQuery';
+        'https://api.github.com/search/repositories?q=$repositoryQuery&page=$page&per_page=$itemsPerPage';
     final apiUri = Uri.parse(apiUrl);
     final response = await http.get(apiUri);
 
