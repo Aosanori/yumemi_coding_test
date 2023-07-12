@@ -21,6 +21,7 @@ RepositoryOwner _$RepositoryOwnerFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RepositoryOwner {
   String get login => throw _privateConstructorUsedError;
+  String get avatar_url => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,7 @@ abstract class $RepositoryOwnerCopyWith<$Res> {
           RepositoryOwner value, $Res Function(RepositoryOwner) then) =
       _$RepositoryOwnerCopyWithImpl<$Res, RepositoryOwner>;
   @useResult
-  $Res call({String login, int id});
+  $Res call({String login, String avatar_url, int id});
 }
 
 /// @nodoc
@@ -52,12 +53,17 @@ class _$RepositoryOwnerCopyWithImpl<$Res, $Val extends RepositoryOwner>
   @override
   $Res call({
     Object? login = null,
+    Object? avatar_url = null,
     Object? id = null,
   }) {
     return _then(_value.copyWith(
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar_url: null == avatar_url
+          ? _value.avatar_url
+          : avatar_url // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -75,7 +81,7 @@ abstract class _$$_RepositoryOwnerCopyWith<$Res>
       __$$_RepositoryOwnerCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String login, int id});
+  $Res call({String login, String avatar_url, int id});
 }
 
 /// @nodoc
@@ -90,12 +96,17 @@ class __$$_RepositoryOwnerCopyWithImpl<$Res>
   @override
   $Res call({
     Object? login = null,
+    Object? avatar_url = null,
     Object? id = null,
   }) {
     return _then(_$_RepositoryOwner(
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar_url: null == avatar_url
+          ? _value.avatar_url
+          : avatar_url // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -108,7 +119,8 @@ class __$$_RepositoryOwnerCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_RepositoryOwner implements _RepositoryOwner {
-  const _$_RepositoryOwner({required this.login, required this.id});
+  const _$_RepositoryOwner(
+      {required this.login, required this.avatar_url, required this.id});
 
   factory _$_RepositoryOwner.fromJson(Map<String, dynamic> json) =>
       _$$_RepositoryOwnerFromJson(json);
@@ -116,11 +128,13 @@ class _$_RepositoryOwner implements _RepositoryOwner {
   @override
   final String login;
   @override
+  final String avatar_url;
+  @override
   final int id;
 
   @override
   String toString() {
-    return 'RepositoryOwner(login: $login, id: $id)';
+    return 'RepositoryOwner(login: $login, avatar_url: $avatar_url, id: $id)';
   }
 
   @override
@@ -129,12 +143,14 @@ class _$_RepositoryOwner implements _RepositoryOwner {
         (other.runtimeType == runtimeType &&
             other is _$_RepositoryOwner &&
             (identical(other.login, login) || other.login == login) &&
+            (identical(other.avatar_url, avatar_url) ||
+                other.avatar_url == avatar_url) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, login, id);
+  int get hashCode => Object.hash(runtimeType, login, avatar_url, id);
 
   @JsonKey(ignore: true)
   @override
@@ -153,6 +169,7 @@ class _$_RepositoryOwner implements _RepositoryOwner {
 abstract class _RepositoryOwner implements RepositoryOwner {
   const factory _RepositoryOwner(
       {required final String login,
+      required final String avatar_url,
       required final int id}) = _$_RepositoryOwner;
 
   factory _RepositoryOwner.fromJson(Map<String, dynamic> json) =
@@ -160,6 +177,8 @@ abstract class _RepositoryOwner implements RepositoryOwner {
 
   @override
   String get login;
+  @override
+  String get avatar_url;
   @override
   int get id;
   @override

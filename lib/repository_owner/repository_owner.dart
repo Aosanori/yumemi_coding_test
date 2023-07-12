@@ -9,6 +9,7 @@ part 'repository_owner.g.dart';
 class RepositoryOwner with _$RepositoryOwner {
   const factory RepositoryOwner({
     required String login,
+    required String avatar_url,
     required int id,
     //@Default(false) bool isPremium,
   }) = _RepositoryOwner;
