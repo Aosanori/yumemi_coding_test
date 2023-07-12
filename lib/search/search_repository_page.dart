@@ -72,15 +72,19 @@ class SearchRepositoryPage extends ConsumerWidget {
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          child: ListTile(
-                            title: Text(data[index].name),
-                            subtitle:
-                                Text(data[index].stargazers_count.toString()),
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(data[index].owner.avatar_url),
+                            child: InkWell(
+                            onTap: () {},
+                            child: ListTile(
+                              title: Text(data[index].name),
+                              subtitle: Text(
+                                '★${data[index].stargazers_count}',
+                              ),
+                              leading: CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(data[index].owner.avatar_url),
+                              ),
+                              //trailing: Icon(icons[index]),
                             ),
-                            //trailing: Icon(icons[index]),
                           ),
                         );
                       },
