@@ -16,29 +16,38 @@ class RepositoryListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchRepositoryOverviewState =
         ref.watch(searchRepositoryStateNotifierProvider);
+    if (searchRepositoryOverviewState == null) {
+      return Container();
+    }
     return Expanded(
       child: Container(
         child: searchRepositoryOverviewState.when(
-          data: (repositoryList) => LazyLoadScrollView(
-            onEndOfPage: () {
-              final notifier = ref.read(
-                searchRepositoryStateNotifierProvider.notifier,
-              );
-              notifier.searchRepositoryOverview();
-            },
-            child: repositoryList.isNotEmpty
-                ? ListView.builder(
-                    itemCount: repositoryList.length,
-                    itemBuilder: (context, index) {
-                      return RepositoryListTile(repositoryList[index]);
-                    },
-                  )
-                : const Center(child: NoResultsWidget()),
-          ),
+          data: (repositoryList) {
+            if (repositoryList.isEmpty) {
+              return const Center(child: NoResultsWidget());
+            }
+            return LazyLoadScrollView(
+              onEndOfPage: () {
+                final notifier = ref.read(
+                  searchRepositoryStateNotifierProvider.notifier,
+                );
+                notifier.searchRepositoryOverview();
+              },
+              child: ListView.builder(
+                itemCount: repositoryList.length,
+                itemBuilder: (context, index) {
+                  return RepositoryListTile(repositoryList[index]);
+                },
+              ),
+            );
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) => error is http.ClientException
-              ? const Center(child: NetworkErrorWidget())
-              : const Center(child: UnknownErrorWidget()),
+          error: (error, stackTrace) {
+            if (error is http.ClientException) {
+              return const Center(child: NetworkErrorWidget());
+            }
+            return const Center(child: UnknownErrorWidget());
+          },
         ),
       ),
     );

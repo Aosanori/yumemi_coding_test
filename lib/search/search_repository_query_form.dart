@@ -4,40 +4,54 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'search_repository_state_notifier.dart';
 
 class SearchRepositoryQueryForm extends ConsumerWidget {
-  const SearchRepositoryQueryForm({super.key});
-
+  SearchRepositoryQueryForm({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(
       searchRepositoryStateNotifierProvider.notifier,
     );
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              right: 10,
-              bottom: 15,
-            ),
-            child: TextField(
-              controller: notifier.queryTextController,
-              enabled: true,
-              // style: TextStyle(eee
-              //     color:
-              //         widget.isDarkMode ? Colors.white : Colors.black),
-              // obscureText: false,
+    return Form(
+      key: _formKey,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 10,
+                bottom: 15,
+              ),
+              child: TextFormField(
+                //controller: notifier.queryTextController,
+                enabled: true,
+                validator: (value) {
+                  // _formKey.currentState!.validate()が実行された時に呼び出される
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                onSaved: (repositoryQuery) {
+                  notifier.searchRepositoryOverviewOnSubmit(repositoryQuery!);
+                },
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: ElevatedButton(
-            onPressed: notifier.searchRepositoryOverviewOnSubmit,
-            child: const Text('Search'),
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState?.save();
+                }
+              },
+              child: const Text('Search'),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs
+const numOfDataOnceFetching = 15;
 
 String generateURLFromSearchQuery(
   String repositoryQuery,
