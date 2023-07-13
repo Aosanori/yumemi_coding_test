@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_collection_literal
+
 const mockResponse_1 = {
   'total_count': 7519137,
   'incomplete_results': true,
