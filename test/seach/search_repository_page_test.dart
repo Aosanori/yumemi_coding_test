@@ -54,22 +54,6 @@ void main() {
         200,
       ),
     );
-    // when(
-    //   mockHttpClient.get(
-    //     Uri.parse(
-    //       'https://api.github.com/search/repositories?q=test&page=2&per_page=15',
-    //     ),
-    //   ),
-    // ).thenAnswer(
-    //   (_) async => http.Response(
-    //     latin1.decode(
-    //       utf8.encode(
-    //         json.encode(mockResponse_2),
-    //       ),
-    //     ),
-    //     200,
-    //   ),
-    // );
     await mockNetworkImagesFor(() async {
       await tester.pumpWidget(
         ProviderScope(
@@ -84,7 +68,8 @@ void main() {
     });
   });
 
-
+  testWidgets('遅延読み込み時のテスト', (tester) async {});
+  
   testWidgets('検索結果がない時NoResultsWidgetが表示されるか', (tester) async {
     when(
       mockHttpClient.get(
