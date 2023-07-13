@@ -6,6 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:yumemi_coding_test/main.dart';
@@ -19,12 +20,17 @@ void main() {
     // expect(find.text('0'), findsOneWidget);
     // expect(find.text('1'), findsNothing);
 
-    // // Tap the '+' icon and trigger a frame.
-    // await tester.tap(find.byIcon(Icons.add));
-    // await tester.pump();
+  testWidgets('TextFieldが空の時にバリデーションがかかるか', (tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: GitHubRepositorySearchApp(),
+      ),
+    );
 
-    // // Verify that our counter has incremented.
+    await tester.tap(find.text('Search'));
+    await tester.pump();
+
     // expect(find.text('0'), findsNothing);
-    // expect(find.text('1'), findsOneWidget);
+    expect(find.text('Please enter some text'), findsOneWidget);
   });
 }
