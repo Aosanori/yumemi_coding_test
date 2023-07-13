@@ -757,7 +757,7 @@ const mockResponse_1 = {
       },
       'html_url': 'https://github.com/travisjeffery/timecop',
       'description':
-          'A gem providing \"time travel\", \"time freezing\", and \"time acceleration\" capabilities, making it simple to test time-dependent code. It provides a unified method to mock Time.now, Date.today, and DateTime.now in a single call.',
+          'A gem providing "time travel", "time freezing", and "time acceleration" capabilities, making it simple to test time-dependent code. It provides a unified method to mock Time.now, Date.today, and DateTime.now in a single call.',
       'fork': false,
       'url': 'https://api.github.com/repos/travisjeffery/timecop',
       'forks_url': 'https://api.github.com/repos/travisjeffery/timecop/forks',

@@ -7,7 +7,8 @@ part of 'repository_overview.dart';
 // **************************************************************************
 
 _$_RepositoryOverview _$$_RepositoryOverviewFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$_RepositoryOverview(
       id: json['id'] as int,
       name: json['name'] as String,
@@ -22,7 +23,8 @@ _$_RepositoryOverview _$$_RepositoryOverviewFromJson(
     );
 
 Map<String, dynamic> _$$_RepositoryOverviewToJson(
-        _$_RepositoryOverview instance) =>
+  _$_RepositoryOverview instance,
+) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
