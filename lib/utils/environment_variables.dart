@@ -1,3 +1,5 @@
+// ignore_for_file: parameter_assignments
+
 const numOfDataOnceFetching = 15;
 
 String generateURLFromSearchQuery(

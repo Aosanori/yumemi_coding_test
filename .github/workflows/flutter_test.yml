@@ -1,4 +1,4 @@
-name: unit test
+name: flutter test
 
 on:
   pull_request:
@@ -8,8 +8,7 @@ on:
       - main
 
 jobs:
-  unit_test:
-    name: flutter unit test
+  flutter_test:
     runs-on: ubuntu-latest
     steps:
       - name: set up repository
