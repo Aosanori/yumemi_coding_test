@@ -1,24 +1,26 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:convert';
 
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
+import 'package:network_image_mock/network_image_mock.dart';
+import 'package:yumemi_coding_test/api/api_client.dart';
 import 'package:yumemi_coding_test/main.dart';
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // // Build our app and trigger a frame.
-    // await tester.pumpWidget(const MyApp());
+import 'mock_data.dart';
+import 'mock_http_client.mocks.dart';
 
-    // // Verify that our counter starts at 0.
-    // expect(find.text('0'), findsOneWidget);
-    // expect(find.text('1'), findsNothing);
+void main() {
+  late MockClient mockHttpClient;
+  late APIClient mockAPIClient;
+
+  setUp(() {
+    mockHttpClient = MockClient();
+    mockAPIClient = APIClient(mockHttpClient);
+  });
 
   testWidgets('TextFieldが空の時にバリデーションがかかるか', (tester) async {
     await tester.pumpWidget(
@@ -30,7 +32,54 @@ void main() {
     await tester.tap(find.text('Search'));
     await tester.pump();
 
-    // expect(find.text('0'), findsNothing);
     expect(find.text('Please enter some text'), findsOneWidget);
+  });
+
+  testWidgets('検索ボタンを押したら検索結果が表示されるのか', (tester) async {
+    when(
+      mockHttpClient.get(
+        Uri.parse(
+          'https://api.github.com/search/repositories?q=test&page=1&per_page=15',
+        ),
+      ),
+    ).thenAnswer(
+      (_) async => http.Response(
+        // https://stackoverflow.com/questions/52990816/dart-json-encodedata-can-not-accept-other-language/52993623#52993623
+        latin1.decode(
+          utf8.encode(
+            json.encode(mockResponse_1),
+          ),
+        ),
+        200,
+      ),
+    );
+    // when(
+    //   mockHttpClient.get(
+    //     Uri.parse(
+    //       'https://api.github.com/search/repositories?q=test&page=2&per_page=15',
+    //     ),
+    //   ),
+    // ).thenAnswer(
+    //   (_) async => http.Response(
+    //     latin1.decode(
+    //       utf8.encode(
+    //         json.encode(mockResponse_2),
+    //       ),
+    //     ),
+    //     200,
+    //   ),
+    // );
+    await mockNetworkImagesFor(() async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [apiClientProvider.overrideWith((ref) => mockAPIClient)],
+          child: const GitHubRepositorySearchApp(),
+        ),
+      );
+      await tester.enterText(find.byType(TextFormField), 'test');
+      await tester.tap(find.text('Search'));
+      await tester.pump();
+      expect(find.byType(ExpansionTileCard), findsWidgets);
+    });
   });
 }
