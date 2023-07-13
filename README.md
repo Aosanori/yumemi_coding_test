@@ -35,7 +35,7 @@ flutter run
 ## アーキテクチャ
 riverpodを用いてLogicとViewを分離したMVCを採用した 
 
-![Architecture](https://github.com/Aosanori/yumemi_coding_test/blob/main/assets/yumemi_architecture.png)
+![Architecture](https://github.com/Aosanori/yumemi_coding_test/blob/master/assets/yumemi_architecture.png)
 
 ## やったことのまとめ
 - アーキテクチャ・ロジック
