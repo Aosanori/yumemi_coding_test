@@ -4391,3 +4391,9 @@ const mockResponse_2 = {
     }
   ]
 };
+
+const mockResponseNoItems = {
+  'total_count': 0,
+  'incomplete_results': false,
+  'items': [],
+};
