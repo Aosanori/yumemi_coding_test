@@ -7,18 +7,17 @@ import '../repository_overview/repository_overview.dart';
 import '../repository_overview/repository_overview_data_source.dart';
 
 final searchRepositoryStateNotifierProvider = StateNotifierProvider<
-    SearchRepositoryStateNotifier, AsyncValue<List<RepositoryOverview>>>((ref) {
+    SearchRepositoryStateNotifier,
+    AsyncValue<List<RepositoryOverview>>?>((ref) {
   return SearchRepositoryStateNotifier(
     ref.read(repositoryOverviewDataSourceProvider),
   );
 });
 
 class SearchRepositoryStateNotifier
-    extends StateNotifier<AsyncValue<List<RepositoryOverview>>> {
+    extends StateNotifier<AsyncValue<List<RepositoryOverview>>?> {
   SearchRepositoryStateNotifier(this.repositoryOverviewDataSource)
-      : super(
-          const AsyncValue.data(<RepositoryOverview>[]),
-        );
+      : super(null);
   final RepositoryOverviewDataSource repositoryOverviewDataSource;
   final TextEditingController queryTextController = TextEditingController();
 
@@ -42,11 +41,11 @@ class SearchRepositoryStateNotifier
         15,
       );
       state = AsyncValue.data(
-        [...state.value ?? [], ...newRepositoryOverviewResults],
+        [...state?.value ?? [], ...newRepositoryOverviewResults],
       );
     } on Exception catch (error, stackTrace) {
       // 検索結果の最後まで行った場合はエラーで置き換えられないように
-      if ((state.value ?? []).isEmpty) {
+      if ((state?.value ?? []).isEmpty) {
         state = AsyncValue.error(error, stackTrace);
       }
     }
