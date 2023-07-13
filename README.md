@@ -31,6 +31,8 @@ flutter pub get
 pod install
 flutter run
 ```
+### 動作例
+![sample](https://github.com/Aosanori/yumemi_coding_test/assets/60128781/d36377df-5a95-4890-92c0-45fbe60cd14a)
 
 ## アーキテクチャ
 riverpodを用いてLogicとViewを分離したMVCを採用した 
@@ -43,8 +45,8 @@ riverpodを用いてLogicとViewを分離したMVCを採用した
         - AsyncValueを用いることで非同期操作のロード/エラー状態の処理を確実にできるようにした
         - APIを叩くためのAPIClientと取得されたデータを整形するDataSource層に分けた
             - APIClientは共通化されているので別のデータを取りたい時もそれを使えば取れるようになっている
-            - APIClientはProviderを用いてDIできるような形にしてテストを行いやすくした
-            - freezedを用いいることでデータの整形を容易にした
+            - APIClientはProviderを用いてMockをDIできるような形にしてテストを行いやすくした
+            - freezedを用いることでデータの整形を容易にした
         - 機能を拡張しやすい、保守しやすい、可読性への寄与
 - 検索欄
     - 検索欄が空白の時は検索欄の下に空白である旨を表示するようにした
