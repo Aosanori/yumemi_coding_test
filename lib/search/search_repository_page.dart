@@ -16,11 +16,11 @@ class SearchRepositoryPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           children: <Widget>[
             SearchRepositoryQueryForm(),
-            RepositoryListView(),
+            const RepositoryListView(),
           ],
         ),
       ),
