@@ -38,7 +38,7 @@ class SearchRepositoryStateNotifier
       final newRepositoryOverviewResults =
           await repositoryOverviewDataSource.searchRepositoryOverviewWithCursor(
         repositoryQuery,
-        state.value?.length ?? 0 ~/ 15, // cursorの役割を果たしている
+        (state?.value?.length ?? 0) ~/ 15 + 1, // cursorの役割を果たしている
         15,
       );
       state = AsyncValue.data(
