@@ -1,4 +1,4 @@
-# yumemi_coding_test
+# github_repository_search_app
 
 GitHubのリポジトリを検索するアプリです。
 
