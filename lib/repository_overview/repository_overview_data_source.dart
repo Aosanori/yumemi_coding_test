@@ -5,6 +5,7 @@ import '../api/api_client.dart';
 import '../utils/environment_variables.dart';
 import 'repository_overview.dart';
 
+// APIから取得されたデータを整形するクラス
 final repositoryOverviewDataSourceProvider = Provider(
   (ref) => RepositoryOverviewDataSource(
     ref.read(apiClientProvider),

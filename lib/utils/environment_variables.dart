@@ -1,7 +1,9 @@
 // ignore_for_file: parameter_assignments
 
+// 一回の通信で取得するデータの数
 const numOfDataOnceFetching = 15;
 
+// クエリからURLを生成する関数
 String generateURLFromSearchQuery(
   String repositoryQuery,
   int page,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 通信に問題があった時に表示するWidget
 class NetworkErrorWidget extends StatelessWidget {
   const NetworkErrorWidget({super.key});
 

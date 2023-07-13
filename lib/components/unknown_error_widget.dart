@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 予期せぬエラーの時表示するWidget
 class UnknownErrorWidget extends StatelessWidget {
   const UnknownErrorWidget({super.key});
 

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'search_repository_state_notifier.dart';
 
+// repositoryの検索フォームとボタンを生成するWidget
 class SearchRepositoryQueryForm extends ConsumerWidget {
   SearchRepositoryQueryForm({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -24,10 +25,8 @@ class SearchRepositoryQueryForm extends ConsumerWidget {
                 bottom: 15,
               ),
               child: TextFormField(
-                //controller: notifier.queryTextController,
                 enabled: true,
                 validator: (value) {
-                  // _formKey.currentState!.validate()が実行された時に呼び出される
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
                   }

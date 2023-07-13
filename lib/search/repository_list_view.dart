@@ -16,9 +16,11 @@ class RepositoryListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchRepositoryOverviewState =
         ref.watch(searchRepositoryStateNotifierProvider);
+    // 初期状態
     if (searchRepositoryOverviewState == null) {
       return Container();
     }
+    // 検索後
     return Expanded(
       child: Container(
         child: searchRepositoryOverviewState.when(
