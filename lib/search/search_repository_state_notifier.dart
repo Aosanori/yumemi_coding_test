@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../repository_overview/repository_overview.dart';
 import '../repository_overview/repository_overview_data_source.dart';
+import '../utils/environment_variables.dart';
 
 final searchRepositoryStateNotifierProvider = StateNotifierProvider<
     SearchRepositoryStateNotifier,
@@ -35,8 +36,9 @@ class SearchRepositoryStateNotifier
       final newRepositoryOverviewResults =
           await repositoryOverviewDataSource.searchRepositoryOverviewWithCursor(
         repositoryQuery,
-        (state?.value?.length ?? 0) ~/ 15 + 1, // cursorの役割を果たしている
-        15,
+        // cursorの役割を果たしている
+        (state?.value?.length ?? 0) ~/ numOfDataOnceFetching + 1,
+        numOfDataOnceFetching,
       );
       state = AsyncValue.data(
         [...state?.value ?? [], ...newRepositoryOverviewResults],
