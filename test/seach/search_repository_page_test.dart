@@ -45,7 +45,8 @@ void main() {
       ),
     ).thenAnswer(
       (_) async => http.Response(
-        // https://stackoverflow.com/questions/52990816/dart-json-encodedata-can-not-accept-other-language/52993623#52993623
+        /// http.Responseのbodyはlatin1のStringを想定しているため、utf-8だとinvalid characterになってしまう
+        /// https://stackoverflow.com/questions/52990816/dart-json-encodedata-can-not-accept-other-language/52993623#52993623
         latin1.decode(
           utf8.encode(
             json.encode(mockResponse_1),

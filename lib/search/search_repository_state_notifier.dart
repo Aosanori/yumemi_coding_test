@@ -33,11 +33,12 @@ class SearchRepositoryStateNotifier
   Future<void> searchRepositoryOverview() async {
     final repositoryQuery = lastSearchRepositoryQuery;
     try {
+      final nextPage = (state?.value?.length ?? 0) ~/ numOfDataOnceFetching + 1;
       final newRepositoryOverviewResults =
           await repositoryOverviewDataSource.searchRepositoryOverviewWithCursor(
         repositoryQuery,
         // cursorの役割を果たしている
-        (state?.value?.length ?? 0) ~/ numOfDataOnceFetching + 1,
+        nextPage,
         numOfDataOnceFetching,
       );
       state = AsyncValue.data(

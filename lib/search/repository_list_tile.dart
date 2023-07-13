@@ -27,6 +27,7 @@ class RepositoryListTile extends ConsumerWidget {
       subtitle: Text(
         '${repositoryOverview.owner.login} ★${repositoryOverview.stargazers_count}',
       ),
+      // TileCard展開後のWidget
       children: <Widget>[
         Row(
           children: <Widget>[

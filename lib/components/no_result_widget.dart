@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// 検索結果がない時に表示するWidget
+
 /// ChatGPT
 /// クエリ：　Flutterで検索結果はありませんでしたを表示するアイコンを教えてください。もしなければ、それを表す画面を表示するコードを提示してください。
 
