@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-final apiClientProvider = Provider((ref) => APIClient());
+final apiClientProvider = Provider((ref) => APIClient(http.Client()));
 
 class APIClient {
+  APIClient(this.client);
+  final http.Client client;
+
   Future<Map<String, dynamic>> fetchData(String url) async {
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await client.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         return data as Map<String, dynamic>;
